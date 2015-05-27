@@ -75,7 +75,16 @@ var GridTitle = React.createClass({
           }
         }
 
-        return (<th onClick={columnIsSortable ? that.sort : null} data-title={col} className={columnSort} key={displayName} style={titleStyles}>{displayName}{sortComponent}</th>);
+        var returnValue = null;
+        if (that.props.columnSettings.hasColumnMetadata() && 
+                typeof meta !== "undefined" &&
+                typeof meta.customHeaderComponent !== 'undefined' &&
+                meta.customHeaderComponent !== null) {
+            var colData = (<meta.customHeaderComponent metadata={meta} />);
+            returnValue = <th className={columnSort} key={displayName} style={titleStyles}>{colData}</th>;
+        }
+
+        return returnValue || (<th onClick={columnIsSortable ? that.sort : null} data-title={col} className={columnSort} key={displayName} style={titleStyles}>{displayName}{sortComponent}</th>);
     });
 
   if(nodes && this.props.multipleSelectionSettings.isMultipleSelection) {

@@ -10,6 +10,14 @@ var LinkComponent = React.createClass({
   }
 });
 
+var HeaderComponent = React.createClass({
+  render: function(){
+    console.log(this.props.metadata);
+    return (<select><option value="volvo">Volvo</option></select>);
+  }
+});
+
+
 var customColumnMetadata = [
 {
   "columnName": "id",
@@ -22,7 +30,9 @@ var customColumnMetadata = [
   "order": 2,
   "locked": false,
   "visible": true,
-  "customComponent": LinkComponent
+  "customComponent": LinkComponent,
+  "customHeaderComponent": HeaderComponent,
+  "headerCallback": function() {}
 },
 {
   "columnName": "city",
